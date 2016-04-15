@@ -11,6 +11,7 @@ gem 'haml-rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'capybara'
 gem 'selenium-webdriver'
+gem 'bootstrap-sass'
 
 group :development, :test do
   gem 'byebug'

@@ -1,13 +1,1 @@
-.row
-  %h1 Agoda
-.row.form-group
-  = label_tag :hotel, 'Khach san'
-  = text_field_tag :hotel, '', class: 'form-control'
-.row.form-group
-  = label_tag :start_date, 'Tu ngay'
-  = text_field_tag :start_date, '', class: 'form-control'
-.row.form-group
-  = label_tag :end_date, 'Den ngay'
-  = text_field_tag :end_date, '', class: 'form-control'
-.row
-  = link_to 'Xem gia', '#', class: 'btn btn-primary btn-large'
+= react_component 'App', data: @tabs

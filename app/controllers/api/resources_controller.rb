@@ -1,13 +1,13 @@
 class Api::ResourcesController < Api::BaseController
-  before_action :load_resource, only: [:update, :delete]
+  before_action :load_resource, only: [:update, :destroy]
 
   def index
-    render json: { resources: resource_class.all }
+    render json: { resources: all_resources }
   end
 
   def create
-    if @resource = resource_class.create(resource_params)
-      render json: { resource: @resource }
+    if resource_class.create(resource_params)
+      render json: { resources: all_resources }
     else
       render json: { errors: 'Error' }, status: :bad_request
     end
@@ -15,7 +15,7 @@ class Api::ResourcesController < Api::BaseController
 
   def update
     if @resource.update(resource_params)
-      render json: { resource: @resource }
+      render json: { resources: all_resources }
     else
       render json: { errors: 'Error' }, status: :bad_request
     end
@@ -23,7 +23,7 @@ class Api::ResourcesController < Api::BaseController
 
   def destroy
     if @resource.destroy
-      render json: { resource: @resource }
+      render json: { resources: all_resources }
     else
       render json: { errors: 'Error' }, status: :unprocessable_entity
     end
@@ -40,5 +40,9 @@ class Api::ResourcesController < Api::BaseController
 
   def resource_params
     params.require(:resource).permit!
+  end
+
+  def all_resources
+    resource_class.all
   end
 end

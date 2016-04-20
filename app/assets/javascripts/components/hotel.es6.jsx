@@ -14,6 +14,11 @@ class Hotel extends React.Component {
     return false;
   }
 
+  onLinksEdit(e) {
+    this.props.onModalOpen(this.props.name, this.props.id);
+    return false;
+  }
+
   onUpdate(e) {
     $.ajax({
       dataType: 'json',
@@ -56,6 +61,7 @@ class Hotel extends React.Component {
         <td>{this.state.name}</td>
         <td className="text-right">
           <a onClick={this.onEdit.bind(this)}><i className="glyphicon glyphicon-pencil" /></a>
+          <a onClick={this.onLinksEdit.bind(this)}><i className="glyphicon glyphicon-link" /></a>
           <a onClick={this.onDelete.bind(this)}><i className="glyphicon glyphicon-trash" /></a>
         </td>
       </tr>

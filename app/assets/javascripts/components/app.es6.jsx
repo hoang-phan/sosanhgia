@@ -17,12 +17,15 @@ class App extends React.Component {
     return HotelBox;
   }
 
-  render () { 
-    tabs = _.map(this.props.data, tab => <Tab title={tab.title} key={tab.title} url={tab.url} isCurrent={this.state.currentTab == tab.id} onClick={this.changeTab.bind(this, tab.id)}/>)
-
+  getCurrentContainer () {
     currentTab = this.state.currentTab;
     current = this.props.data.filter(tab => tab.id == currentTab)[0];
-    currentContainer = React.createElement(this.getComponentClass(current.id), current.attributes);
+    return React.createElement(this.getComponentClass(current.id), current.attributes);
+  }
+
+  render () { 
+    tabs = _.map(this.props.data, tab => <Tab title={tab.title} key={tab.title} url={tab.url} isCurrent={this.state.currentTab == tab.id} onClick={this.changeTab.bind(this, tab.id)}/>)
+    currentContainer = this.getCurrentContainer();
 
     return (
       <div>

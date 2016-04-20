@@ -30,12 +30,13 @@ class Api::ResourcesController < Api::BaseController
   end
 
   private
+  
   def load_resource
     @resource = resource_class.find(params[:id])
   end
 
   def resource_class
-    @resource_class ||= controller_name.singularize.capitalize.constantize
+    @resource_class ||= controller_name.singularize.camelize.constantize
   end
 
   def resource_params

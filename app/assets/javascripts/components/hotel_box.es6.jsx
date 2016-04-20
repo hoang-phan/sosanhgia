@@ -47,7 +47,7 @@ class HotelBox extends React.Component {
     return (
       <div className="hotel-box">
         <HotelForm onSubmit={this.onHotelCreated.bind(this)} />
-        <Hotels data={this.state.data} onDelete={this.onDelete.bind(this)} url={this.props.url} />
+        <Hotels data={this.state.data} onDelete={this.onDelete.bind(this)} url={this.props.url} links_url={this.props.links_url}/>
       </div>
     )
   }

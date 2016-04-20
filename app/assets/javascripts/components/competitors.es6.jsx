@@ -1,15 +1,24 @@
 class Competitors extends React.Component {
+  noCompetitorTemplate () {
+    return (
+      <div className="competitors">
+        <h3>Danh sách đối thủ</h3>
+        <p><em>Không có đối thủ nào</em></p>
+      </div>
+    )
+  }
+
+  rowFor (competitor) {
+    return <Competitor name={competitor.name} baseLink={competitor.base_link} id={competitor.id}
+                       key={competitor.id} url={this.props.url} onDelete={this.props.onDelete}/>
+  }
+
   render () { 
     if (this.props.data.length == 0) {
-      return (
-        <div className="competitors">
-          <h3>Danh sách đối thủ</h3>
-          <p><em>Không có đối thủ nào</em></p>
-        </div>
-      )
+      return this.noCompetitorTemplate();
     }
     
-    competitorRows = _.map(this.props.data, competitor => <Competitor name={competitor.name} baseLink={competitor.base_link} url={this.props.url} key={competitor.id} id={competitor.id} onDelete={this.props.onDelete}/>)
+    competitorRows = _.map(this.props.data, competitor => this.rowFor(competitor));
 
     return (
       <div className="competitors">

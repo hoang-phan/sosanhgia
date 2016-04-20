@@ -26,9 +26,9 @@ class CompetitorForm extends React.Component {
 
   render () {
     return (
-      <form className="form" onSubmit={this.submit.bind(this)}>
+      <form className="add-form" onSubmit={this.submit.bind(this)}>
         <div className="form-group">
-          <input className="form-control" placeholder="Tên" onChange={this.handleNameChange.bind(this)} value={this.state.name}/>
+          <input className="form-control" placeholder="Tên" onChange={this.handleNameChange.bind(this)} value={this.state.name} autoFocus={true}/>
         </div>
         <div className="form-group">
           <input className="form-control" placeholder="Website" onChange={this.handleBaseLinkChange.bind(this)} value={this.state.baseLink}/>

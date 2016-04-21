@@ -15,6 +15,9 @@
 //= require bootstrap-sprockets
 //= require lodash
 //= require toastr
+//= require moment
+//= require bootstrap-sortable
+//= require ./utils
 //= require react
 //= require react_ujs
 //= require components

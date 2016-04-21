@@ -1,4 +1,4 @@
-class CompetitorBox extends React.Component {
+class AreaBox extends React.Component {
   constructor (props) {
     super(props);
     this.state = { data: [] };
@@ -16,12 +16,12 @@ class CompetitorBox extends React.Component {
     })
   }
 
-  onCompetitorCreated (competitor) {
+  onAreaCreated (area) {
     $.ajax({
       dataType: 'json',
       type: 'POST',
       url: this.props.url,
-      data: { resource: competitor },
+      data: { resource: area },
       success: function(response) {
         this.setState({data: response.resources});
         $.bootstrapSortable(true);
@@ -48,9 +48,9 @@ class CompetitorBox extends React.Component {
 
   render () {
     return (
-      <div className="competitor-box">
-        <CompetitorForm onSubmit={this.onCompetitorCreated.bind(this)} />
-        <Competitors data={this.state.data} onDelete={this.onDelete.bind(this)} url={this.props.url} />
+      <div className="area-box">
+        <AreaForm onSubmit={this.onAreaCreated.bind(this)} />
+        <Areas data={this.state.data} onDelete={this.onDelete.bind(this)} url={this.props.url} />
       </div>
     )
   }

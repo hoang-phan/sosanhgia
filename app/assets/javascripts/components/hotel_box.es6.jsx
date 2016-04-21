@@ -1,7 +1,7 @@
 class HotelBox extends React.Component {
   constructor (props) {
     super(props);
-    this.state = { data: [] };
+    this.state = { data: [], areaOptions: [] };
     this.getServerData();
   }
 
@@ -13,6 +13,7 @@ class HotelBox extends React.Component {
       data: { resource: hotel },
       success: function(response) {
         this.setState({data: response.resources});
+        $.bootstrapSortable(true);
         toastr.info('Cập nhật thành công');
       }.bind(this),
       failure: function(response) {
@@ -28,6 +29,7 @@ class HotelBox extends React.Component {
       url: this.props.url + "/" + id,
       success: function(response) {
         this.setState({data: response.resources});
+        $.bootstrapSortable(true);
         toastr.info('Đã xóa');
       }.bind(this)
     });
@@ -39,6 +41,16 @@ class HotelBox extends React.Component {
       url: this.props.url,
       success: function(response) {
         this.setState({data: response.resources});
+        $.bootstrapSortable(true);
+      }.bind(this)
+    });
+
+    $.ajax({
+      dataType: 'json',
+      url: this.props.areas_url,
+      success: function(response) {
+        areaOptions = _.map(response.resources, (area) => [area.id, area.name]);
+        this.setState({areaOptions: areaOptions});
       }.bind(this)
     });
   }
@@ -46,8 +58,8 @@ class HotelBox extends React.Component {
   render () {
     return (
       <div className="hotel-box">
-        <HotelForm onSubmit={this.onHotelCreated.bind(this)} />
-        <Hotels data={this.state.data} onDelete={this.onDelete.bind(this)} url={this.props.url} links_url={this.props.links_url}/>
+        <HotelForm onSubmit={this.onHotelCreated.bind(this)} areaOptions={this.state.areaOptions}/>
+        <Hotels data={this.state.data} onDelete={this.onDelete.bind(this)} url={this.props.url} linksUrl={this.props.links_url} areaOptions={this.state.areaOptions}/>
       </div>
     )
   }

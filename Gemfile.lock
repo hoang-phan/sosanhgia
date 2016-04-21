@@ -83,6 +83,8 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
+    historyjs-rails (1.0.1)
+      railties (>= 3.0)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -108,6 +110,8 @@ GEM
     mime-types-data (3.2016.0221)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
+    momentjs-rails (2.11.1)
+      railties (>= 3.1)
     multi_json (1.11.2)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
@@ -137,6 +141,8 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_bootstrap_sortable (2.0.0)
+      momentjs-rails (~> 2, >= 2.8.3)
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (4.2.5)
@@ -207,12 +213,15 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   haml-rails
+  historyjs-rails
   jbuilder (~> 2.0)
   jquery-rails
   lodash-rails
+  momentjs-rails
   pg (~> 0.15)
   rails (= 4.2.5)
   rails_12factor
+  rails_bootstrap_sortable
   react-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

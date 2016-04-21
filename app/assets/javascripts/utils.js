@@ -5,5 +5,5 @@ window.getAreaById = function(collection, id) {
 }
 
 window.getCurrentTab = function() {
-  return parseInt(location.hash.substring(2)) || parseInt(location.pathname.substring(1)) || 1;
+  return location.hash.substring(2) || location.pathname.substring(1) || 'doi-thu';
 }

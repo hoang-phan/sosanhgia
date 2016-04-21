@@ -2,21 +2,21 @@ class HomesController < ApplicationController
   def show
     @tabs = [
       {
-        id: 1,
+        id: 'doi-thu',
         title: 'Đối thủ',
         attributes: {
           url: api_competitors_path
         }
       },
       {
-        id: 2,
+        id: 'khu-vuc',
         title: 'Khu vực',
         attributes: {
           url: api_areas_path
         }
       },
       {
-        id: 3,
+        id: 'khach-san',
         title: 'Khách sạn',
         attributes: {
           url: api_hotels_path,

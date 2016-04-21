@@ -18,9 +18,9 @@ class App extends React.Component {
 
   getComponentClass (id) {
     switch (id) {
-      case 2:
+      case 'khu-vuc':
         return AreaBox;
-      case 3:
+      case 'khach-san':
         return HotelBox;
     }
 
@@ -30,7 +30,11 @@ class App extends React.Component {
   getCurrentContainer () {
     currentTab = this.state.currentTab;
     current = this.props.data.filter(tab => tab.id == currentTab)[0];
-    return React.createElement(this.getComponentClass(current.id), current.attributes);
+    if (current) {
+      return React.createElement(this.getComponentClass(current.id), current.attributes);
+    } {
+      return <ErrorPage />
+    }
   }
 
   rowFor (tab) {

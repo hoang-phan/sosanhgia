@@ -83,8 +83,6 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
-    historyjs-rails (1.0.1)
-      railties (>= 3.0)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -213,7 +211,6 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   haml-rails
-  historyjs-rails
   jbuilder (~> 2.0)
   jquery-rails
   lodash-rails

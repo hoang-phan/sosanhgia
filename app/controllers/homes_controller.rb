@@ -3,17 +3,25 @@ class HomesController < ApplicationController
     @tabs = [
       {
         id: 1,
-        title: 'Khách sạn',
+        title: 'Đối thủ',
         attributes: {
-          url: api_hotels_path,
-          links_url: api_hotel_links_path
+          url: api_competitors_path
         }
       },
       {
         id: 2,
-        title: 'Đối thủ',
+        title: 'Khu vực',
         attributes: {
-          url: api_competitors_path
+          url: api_areas_path
+        }
+      },
+      {
+        id: 3,
+        title: 'Khách sạn',
+        attributes: {
+          url: api_hotels_path,
+          links_url: api_hotel_links_path,
+          areas_url: api_areas_path
         }
       }
     ]

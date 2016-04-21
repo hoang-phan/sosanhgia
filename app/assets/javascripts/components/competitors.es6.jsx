@@ -23,7 +23,7 @@ class Competitors extends React.Component {
     return (
       <div className="competitors">
         <h3>Danh sách đối thủ</h3>
-        <table className="table table-hover table-striped">
+        <table className="table table-hover table-striped sortable">
           <thead>
             <tr>
               <th>Tên</th>

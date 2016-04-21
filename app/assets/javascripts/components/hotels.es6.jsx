@@ -24,8 +24,11 @@ class Hotels extends React.Component {
   }
 
   rowFor (hotel) {
-    return <Hotel name={hotel.name} key={hotel.id} id={hotel.id} url={this.props.url} 
-                  onDelete={this.props.onDelete} onModalOpen={this.onModalOpen.bind(this)}/>
+    area = getAreaById(this.props.areaOptions, hotel.area_id) || ['', 'Not Specified']
+
+    return <Hotel name={hotel.name} key={hotel.id} id={hotel.id} url={this.props.url}
+                  onDelete={this.props.onDelete} onModalOpen={this.onModalOpen.bind(this)}
+                  areaId={area[0]} areaName={area[1]} areaOptions={this.props.areaOptions}/>
   }
 
   render () { 
@@ -38,16 +41,17 @@ class Hotels extends React.Component {
     return (
       <div className="hotels">
         <h3>Danh sách khách sạn</h3>
-        <table className="table table-hover table-striped">
+        <table className="table table-hover table-striped sortable" data-toggle="table">
           <thead>
             <tr>
               <th>Tên</th>
+              <th>Khu vực</th>
               <th></th>
             </tr>
           </thead>
           <tbody>{ hotelRows }</tbody>
         </table>
-        <LinksModal name={this.state.hotel_name} id={this.state.hotel_id} url={this.props.links_url} />
+        <LinksModal name={this.state.hotel_name} id={this.state.hotel_id} url={this.props.linksUrl} />
       </div>
     );
   }

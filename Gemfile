@@ -17,7 +17,6 @@ gem 'lodash-rails'
 gem 'toastr-rails'
 gem 'rails_bootstrap_sortable'
 gem 'momentjs-rails'
-gem 'historyjs-rails'
 
 group :development, :test do
   gem 'byebug'

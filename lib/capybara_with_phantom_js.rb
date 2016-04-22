@@ -5,12 +5,19 @@ module CapybaraWithPhantomJs
   include Capybara::DSL
 
   def new_session
-    Capybara.register_driver :poltergeist_errorless do |app|
+    Capybara.configure do |config|
+      config.run_server = false
+      config.default_driver = :poltergeist
+      config.app_host = 'http://www.agoda.com'
+    end
+
+    Capybara.register_driver :poltergeist do |app|
       Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 10000, phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=any'])
     end
 
-    Capybara.default_driver = :poltergeist_errorless
     Capybara.ignore_hidden_elements = false
+
+    page.driver.browser.url_blacklist = ['https://www.youtube.com']
 
     @session = Capybara::Session.new(:poltergeist)
 

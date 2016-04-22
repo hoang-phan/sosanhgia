@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resource :home, only: [:show]
 
   namespace :api do
-    resources :prices, only: [:index]
+    resources :prices, only: [:index, :create]
     resources :hotels, only: [:index, :create, :update, :destroy]
     resources :areas, only: [:index, :create, :update, :destroy]
     resources :hotel_links, only: [:index, :create, :update, :destroy]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415015924) do
+ActiveRecord::Schema.define(version: 20160421150522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,37 @@ ActiveRecord::Schema.define(version: 20160415015924) do
   add_index "hotels", ["area_id"], name: "index_hotels_on_area_id", using: :btree
   add_index "hotels", ["name"], name: "index_hotels_on_name", using: :btree
 
+  create_table "prices", force: :cascade do |t|
+    t.integer  "amount"
+    t.string   "additional_info"
+    t.float    "additional_percent"
+    t.boolean  "onsite",             default: false
+    t.integer  "room_id"
+    t.integer  "hotel_link_id"
+    t.string   "date"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "prices", ["date"], name: "index_prices_on_date", using: :btree
+  add_index "prices", ["hotel_link_id"], name: "index_prices_on_hotel_link_id", using: :btree
+  add_index "prices", ["onsite"], name: "index_prices_on_onsite", using: :btree
+  add_index "prices", ["room_id"], name: "index_prices_on_room_id", using: :btree
+
+  create_table "rooms", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "hotel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "rooms", ["hotel_id"], name: "index_rooms_on_hotel_id", using: :btree
+  add_index "rooms", ["name"], name: "index_rooms_on_name", using: :btree
+
   add_foreign_key "hotel_links", "competitors", on_delete: :cascade
   add_foreign_key "hotel_links", "hotels", on_delete: :cascade
   add_foreign_key "hotels", "areas", on_delete: :cascade
+  add_foreign_key "prices", "hotel_links", on_delete: :cascade
+  add_foreign_key "prices", "rooms", on_delete: :cascade
+  add_foreign_key "rooms", "hotels", on_delete: :cascade
 end

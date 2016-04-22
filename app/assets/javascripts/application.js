@@ -16,6 +16,7 @@
 //= require lodash
 //= require toastr
 //= require moment
+//= require bootstrap/bootstrap-tooltip
 //= require bootstrap-sortable
 //= require ./utils
 //= require react

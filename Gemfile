@@ -10,13 +10,15 @@ gem 'jbuilder', '~> 2.0'
 gem 'haml-rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'capybara'
-gem 'selenium-webdriver'
+gem 'poltergeist'
 gem 'bootstrap-sass'
 gem 'react-rails'
 gem 'lodash-rails'
 gem 'toastr-rails'
 gem 'rails_bootstrap_sortable'
+gem 'bootstrap-tooltip-rails'
 gem 'momentjs-rails'
+gem 'activerecord-import'
 
 group :development, :test do
   gem 'byebug'

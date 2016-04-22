@@ -24,7 +24,7 @@ class Hotels extends React.Component {
   }
 
   rowFor (hotel) {
-    area = getAreaById(this.props.areaOptions, hotel.area_id) || ['', 'Not Specified']
+    area = getAreaById(this.props.areaOptions, hotel.area_id) || ['', 'Chưa chọn']
 
     return <Hotel name={hotel.name} key={hotel.id} id={hotel.id} url={this.props.url}
                   onDelete={this.props.onDelete} onModalOpen={this.onModalOpen.bind(this)}
@@ -32,7 +32,7 @@ class Hotels extends React.Component {
   }
 
   render () { 
-    if (this.props.data.length == 0) {
+    if (this.props.data.length == 0) {  
       return this.noHotelTemplate();
     }
     

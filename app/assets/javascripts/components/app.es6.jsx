@@ -18,13 +18,15 @@ class App extends React.Component {
 
   getComponentClass (id) {
     switch (id) {
+      case 'doi-thu':
+        return CompetitorBox
       case 'khu-vuc':
         return AreaBox;
       case 'khach-san':
         return HotelBox;
     }
 
-    return CompetitorBox;
+    return Dashboard;
   }
 
   getCurrentContainer () {

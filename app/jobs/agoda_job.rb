@@ -11,7 +11,7 @@ class AgodaJob < ActiveJob::Base
     new_session
     visit link.link
 
-    prices = []
+    end_date = start_date if end_date.blank?
 
     (date_parse(start_date)..date_parse(end_date)).each do |date|
       search(date)
@@ -23,7 +23,7 @@ class AgodaJob < ActiveJob::Base
       grid_table.css('tr.room-type').each do |room_type|
         room = hotel.rooms.find_or_create_by(name: room_type.css('.room-name span').first.text)
         additional_info = room_type.css('.excluded-pricing-info').first.try(:text).to_s
-        prices << Price.new(
+        Price.create(
           hotel_link: link, 
           room: room, 
           amount: (room_type.css('.sellprice').text.gsub('.', '').to_i * 1.155).round, 
@@ -32,8 +32,6 @@ class AgodaJob < ActiveJob::Base
         )
       end
     end
-
-    Price.import(prices)
   rescue => e
     p e
   end

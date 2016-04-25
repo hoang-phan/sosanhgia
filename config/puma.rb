@@ -15,6 +15,6 @@ on_worker_boot do
 
   # deploying-rails-applications-with-the-puma-web-server#on-worker-boot
 
-  @sidekiq_pid ||= spawn('bundle exec sidekiq -q default')
+  @sidekiq_pid ||= spawn('bundle exec sidekiq -c 2 -q default')
   ActiveRecord::Base.establish_connection
 end

@@ -11,6 +11,9 @@ class AgodaJob < ActiveJob::Base
     new_session
     visit link.link
 
+    first('#currency').click
+    first('.currency-item', text: 'VND').click
+
     end_date = start_date if end_date.blank?
 
     (date_parse(start_date)..date_parse(end_date)).each do |date|

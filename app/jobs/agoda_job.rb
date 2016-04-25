@@ -1,6 +1,6 @@
 class AgodaJob < ActiveJob::Base
   include CapybaraWithPhantomJs
-  
+
   queue_as :default
 
   def perform(start_date, end_date, hotel_id, competitor_id)
@@ -16,16 +16,18 @@ class AgodaJob < ActiveJob::Base
     (date_parse(start_date)..date_parse(end_date)).each do |date|
       search(date)
 
-      page.find('#room-grid-table').all('tr.room-type').each do |room_type|
-        room = hotel.rooms.find_or_create_by(name: room_type.first('.room-name span').text)
-        additional_info = room_type.first('.excluded-pricing-info').try(:text).to_s
+      page_info = Nokogiri::HTML(page.html)
+
+      grid_table = page_info.css('#room-grid-table').first
+
+      grid_table.css('tr.room-type').each do |room_type|
+        room = hotel.rooms.find_or_create_by(name: room_type.css('.room-name span').first.text)
+        additional_info = room_type.css('.excluded-pricing-info').first.try(:text).to_s
         prices << Price.new(
           hotel_link: link, 
           room: room, 
-          amount: room_type.first('.sellprice').text.gsub('.', '').to_i, 
-          onsite: room_type.has_css?('.ROOMMIXING .paylater'),
-          additional_info: additional_info,
-          additional_percent: additional_info.scan(/\d+%/).sum(&:to_i),
+          amount: (room_type.css('.sellprice').text.gsub('.', '').to_i * 1.155).round, 
+          onsite: room_type.css('.ROOMMIXING .paylater').first.present?,
           date: date.strftime('%d/%m/%Y')
         )
       end
@@ -50,10 +52,10 @@ class AgodaJob < ActiveJob::Base
       click_on 'searchbox-searchbutton'
     else
       tomorrow = date.tomorrow
-      page.execute_script("$('.oneline-checkout.checkout-input').val('#{tomorrow.day} Tháng #{tomorrow.month} #{tomorrow.year}')")
-      page.execute_script("$('.oneline-checkin.checkin-input').val('#{date.day} Tháng #{date.month} #{date.year}')")
-      first('.oneline-search-button').click
+      searchbox = first('.oneline-searchbox')
+      searchbox.first('.oneline-checkout.checkout-input').set("#{tomorrow.day} Tháng #{tomorrow.month} #{tomorrow.year}')")
+      searchbox.first('.oneline-checkin.checkin-input').set("#{date.day} Tháng #{date.month} #{date.year}')")
+      searchbox.first('.oneline-search-button').click
     end
-    sleep 1
   end
 end

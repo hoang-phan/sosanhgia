@@ -228,6 +228,7 @@ DEPENDENCIES
   jquery-rails
   lodash-rails
   momentjs-rails
+  nokogiri
   pg (~> 0.15)
   poltergeist
   puma

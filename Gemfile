@@ -21,6 +21,7 @@ gem 'momentjs-rails'
 gem 'activerecord-import'
 gem 'puma'
 gem 'sidekiq'
+gem 'nokogiri'
 
 group :development, :test do
   gem 'byebug'

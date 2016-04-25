@@ -1,7 +1,7 @@
-class Crawler
-  include CapybaraWithPhantomJs
+class AgodaJob < ActiveJob::Base
+  queue_as :default
 
-  def crawl(start_date, end_date, hotel_id, competitor_id)
+  def perform(start_date, end_date, hotel_id, competitor_id)
     hotel = Hotel.find(hotel_id)
     link = hotel.hotel_links.find_by(competitor_id: competitor_id)
     Price.delete_all(hotel_link: link)

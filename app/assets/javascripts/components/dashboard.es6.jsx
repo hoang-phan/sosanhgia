@@ -45,8 +45,8 @@ class Dashboard extends React.Component {
       data: _.pick(this.state, 'hotel_id', 'competitor_id', 'start_date', 'end_date'),
       url: this.props.url,
       success: function(response) {
-        this.setState({ prices: response.prices, dates: response.dates });
-      }.bind(this)
+        toastr.info('Send request success, please come back later');
+      }
     });
     return false;
   }

@@ -17,7 +17,7 @@ class HotelLink < ActiveRecord::Base
 
   def all_prices
     result = {}
-    prices.joins(:room).pluck('rooms.name AS room_name', :amount, :additional_info, :additional_percent, :onsite, :date).group_by(&:first).each do |room_name, raw_record|
+    prices.joins(:room).pluck('rooms.name AS room_name', :amount, :onsite, :date).group_by(&:first).each do |room_name, raw_record|
       result[room_name] = raw_record.group_by(&:last)
     end
 

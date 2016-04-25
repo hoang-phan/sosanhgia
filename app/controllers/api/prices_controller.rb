@@ -4,8 +4,8 @@ class Api::PricesController < Api::BaseController
   end
 
   def create
-    Crawler.new.crawl(params[:start_date], params[:end_date], params[:hotel_id], params[:competitor_id])
-    render json: all_prices
+    AgodaJob.perform_later(params[:start_date], params[:end_date], params[:hotel_id], params[:competitor_id])
+    render json: { success: true }
   end
 
   private

@@ -12,7 +12,7 @@ module CapybaraWithPhantomJs
     end
 
     Capybara.register_driver :poltergeist do |app|
-      Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 10000, phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=any'])
+      Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 10000, phantomjs_options: ['--disk-cache=yes', '--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=any'])
     end
 
     Capybara.ignore_hidden_elements = false

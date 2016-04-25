@@ -1,4 +1,6 @@
 class AgodaJob < ActiveJob::Base
+  include CapybaraWithPhantomJs
+  
   queue_as :default
 
   def perform(start_date, end_date, hotel_id, competitor_id)

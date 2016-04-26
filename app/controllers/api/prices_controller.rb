@@ -4,7 +4,14 @@ class Api::PricesController < Api::BaseController
   end
 
   def create
-    AgodaJob.perform_later(params[:start_date], params[:end_date], params[:hotel_id], params[:competitor_id])
+    competitor = Competitor.find(params[:competitor_id])
+    case competitor.name.downcase
+    when 'agoda'
+      AgodaJob.perform_later(*job_params)
+    when 'mytour'
+      MytourJob.perform_later(*job_params)
+    end
+
     render json: { success: true }
   end
 
@@ -17,5 +24,9 @@ class Api::PricesController < Api::BaseController
 
   def link
     @link ||= HotelLink.find_by(competitor_id: params[:competitor_id], hotel_id: params[:hotel_id])
+  end
+
+  def job_params
+    [params[:start_date], params[:end_date], params[:hotel_id], params[:competitor_id]]
   end
 end

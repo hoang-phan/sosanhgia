@@ -24,8 +24,7 @@ class AgodaJob < ActiveJob::Base
       grid_table = page_info.css('#room-grid-table').first
 
       grid_table.css('tr.room-type').each do |room_type|
-        room = hotel.rooms.find_or_create_by(name: room_type.css('.room-name span').first.text)
-        additional_info = room_type.css('.excluded-pricing-info').first.try(:text).to_s
+        room = hotel.rooms.find_or_create_by(name: room_type.css('.room-name span').first.text.strip)
         Price.create(
           hotel_link: link, 
           room: room, 
